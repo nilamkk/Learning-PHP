@@ -32,6 +32,7 @@ $sql= "CREATE TABLE students ( Name VARCHAR(30) NOT NULL ,
                             Password VARCHAR(30) NOT NULL )";
 
 $result = mysqli_query($conn,$sql);
+
 if($result){
     echo "The table is created successfully !!!";
 }else{
@@ -46,9 +47,17 @@ echo "<br>";
 
 
 
+// insert entries into table students in demoDB
+$sql= "INSERT INTO students ( Name,SchNo,Email,Password ) VALUES ( 'Nilam' , '1815127', 'nilamkk54438@gmail.com', 'nkk1234')";
+$result= mysqli_query($conn,$sql);
 
-
-
+if($result){
+    echo "The record is inserted into the table !!!";
+}else{
+    echo "Sorry !!! Error: ". mysqli_error($conn);
+}
+echo "<br>";
+echo "<br>";
 
 
 
