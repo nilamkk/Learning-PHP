@@ -15,6 +15,16 @@
     <h1>Enter your details: </h1>
 
     <form action="/LearningPHP/theory/emailPw.php" method="post" >
+        
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="exampleInputName" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputSchNo" class="form-label">Scholar No</label>
+            <input type="text" class="form-control" name="schno" id="exampleInputSchNo" aria-describedby="emailHelp">
+        </div>
+
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -32,14 +42,27 @@
     </form>
 
 
-    <?php
+    <?php include "demoDb.php";
+  
         if ( $_SERVER['REQUEST_METHOD']=='POST' ){
+            $name= $_POST['name'];
+            $schno= $_POST['schno'];
             $email= $_POST['email'];
             $pass= $_POST['pass'];
 
-            echo '<div class="alert alert-success" role="alert">Your email is '. $email.' and password is '.$pass.'</div>';
+            $sql= "INSERT INTO students ( Name,SchNo,Email,Password ) VALUES ( '$name' ,  '$schno' , '$email' , '$pass' )";
+            $result= mysqli_query($conn,$sql);
+            if($result){
+              echo '<div class="alert alert-success" role="alert"> The record is inserted into the table !!! </div>';
+            }else{
+              echo '<div class="alert alert-danger" role="alert">Sorry !!! Error:  '. mysqli_error($conn).'</div>';
+            }
+            echo "<br>";
         }
     ?>
+
+
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 
